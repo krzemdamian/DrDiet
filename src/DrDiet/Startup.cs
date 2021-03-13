@@ -29,7 +29,7 @@ namespace DrDiet
 
             app.UseRouting();
 
-            app.UseDefaultFiles();
+            //app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseNodeModules();
 
@@ -37,7 +37,7 @@ namespace DrDiet
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action}/{id?}");
             });
         }
     }
