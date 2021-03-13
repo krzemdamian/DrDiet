@@ -13,5 +13,20 @@ namespace DrDiet.Controllers
         {
             return View();
         }
+
+        public IActionResult Products()
+        {
+            return View();
+        }
+
+        public IActionResult Recipes()
+        {
+            return View();
+        }
+
+        public IActionResult Menu()
+        {
+            return View();
+        }
     }
 }
