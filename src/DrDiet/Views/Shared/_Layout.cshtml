@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Dr Diet: @ViewBag.Title</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1>Dr Diet</h1>
+        <menu>
+            <ul>
+                <li><a asp-controller="App" asp-action="Index">Home</a></li>
+                <li><a asp-controller="App" asp-action="Products">Products</a></li>
+                <li><a asp-controller="App" asp-action="Recipes">Recipes</a></li>
+                <li><a asp-controller="App" asp-action="Menu">Menu</a></li>
+            </ul>
+        </menu>
+    </header>
+    <section>
+        <h2>@ViewBag.Title</h2>
+        @RenderBody()
+    </section>
+    <footer>Copyright 2021 Damian Krzemiński</footer>
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
+    <script src="~/js/index.js"></script>
+    @RenderSection("scripts", false);
+</body>
+</html>
