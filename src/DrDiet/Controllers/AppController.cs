@@ -1,5 +1,6 @@
 ﻿using DrDiet.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,21 +25,22 @@ namespace DrDiet.Controllers
 
         public IActionResult Products()
         {
-            var result = _ctx.Products.ToList();
-            var result2 = _ctx.Recipes.ToList();
-            var result3 = _ctx.Courses.ToList();
-            var result4 = _ctx.MenuPositions.ToList();
+            var model = _ctx.Products.ToList();
 
-            return View();
+            return View(model);
         }
 
         public IActionResult Recipes()
         {
-            return View();
+            //var model = _ctx.Recipes.Include(r => r.Ingredients).ToList();
+            var model = _ctx.Recipes.Include(r => r.Ingredients).ThenInclude(i => i.Product);
+            return View(model);
         }
 
         public IActionResult Menu()
         {
+            var model = _ctx.Courses.ToList();
+            var model2 = _ctx.MenuPositions.ToList();
             return View();
         }
     }
