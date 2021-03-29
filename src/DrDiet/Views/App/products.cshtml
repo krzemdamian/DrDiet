@@ -2,13 +2,39 @@
 <h1>Products:</h1>
 <p>Count: @Model.Count()</p>
 
-<table>
-    <tr><td>Name</td><td>kcal per 100g</td></tr>
-@foreach (var p in Model)   
-{
-    <tr>
-        <td>@p.Name</td>
-        <td>@(Math.Round(p.Energy/10, 0))</td>
-    </tr>
-}
+<script src="~/js/products.js"></script>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>kcal/100g</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="2">
+                <form id="add_product_form" method="post">
+                    <label>Name</label>
+                    <input type="text" name="name" />
+                    <label>kcal/100g</label>
+                    <input type="number" name="kcal"/>
+                    <input id="add_product_button" type="submit" class="btn btn-primary small_button" value="Dodaj"/>
+                </form>
+            </td>
+        </tr>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@(Math.Round(p.Energy/10, 0))
+                <form id="edit_product_form" method="post">
+                    <input id="edit_product_button" name="@p.Id" type="submit" class="btn btn-dark small_button" value="Edytuj"/>
+                </form>
+                <form id="delete_product_form" method="post">
+                <button id="delete_product_button" type="button" class="btn btn-dark small_button" value="Usuń"></button>
+                </form>
+                    </td>
+            </tr>
+        }
+    </tbody>
 </table>

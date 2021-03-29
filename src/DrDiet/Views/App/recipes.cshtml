@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<Recipe>
-<h1>Products:</h1>
+<h1>Recipes:</h1>
 <p>Count: @Model.Count()</p>
 
-<table border="1">
-    <tr><td colspan="3">Name</td></tr>
-    @foreach (var r in Model)
-    {
-        <tr>
-            <td colspan="2">@r.Name</td>
-            <td>@(Math.Round(r.Ingredients.Sum(i => i.Ammount * (double)i.Product.Energy), 0)) kcal</td>
-        </tr>
+@*<tr><th scope="col">Name</th></tr>*@
+@foreach (var r in Model)
+{
+    <div>
+        <div>@r.Name</div>
+        <div>@(Math.Round(r.Ingredients.Sum(i => i.Ammount * (double)i.Product.Energy), 0)) kcal</div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Kalorie</th>
+            </tr>
+        </thead>
         @foreach (var i in r.Ingredients)
         {
             <tr>
@@ -18,6 +25,6 @@
                 <td>@(Math.Round((double)i.Product.Energy * i.Ammount, 0)) kcal</td>
             </tr>
         }
-        <tr><td colspan="3">@r.Instructions</td></tr>
-    }
-</table>
+    </table>
+    <div>@r.Instructions</div>
+}
