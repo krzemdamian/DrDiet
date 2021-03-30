@@ -24,30 +24,6 @@ namespace DrDiet.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Products(string name, int kcal)
-        {
-            var newProduct = new Product()
-            {
-                Name = name,
-                Energy = kcal * 10
-            };
-
-            _ctx.Add(newProduct);
-            _ctx.SaveChanges();
-
-            var model = _ctx.Products.ToList();
-
-            return View(model);
-        }
-
-        public IActionResult Products()
-        {
-            var model = _ctx.Products.ToList();
-
-            return View(model);
-        }
-
         public IActionResult Recipes()
         {
             //var model = _ctx.Recipes.Include(r => r.Ingredients).ToList();

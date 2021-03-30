@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Product>
+<h1>Products:</h1>
+<p>Count: @Model.Count()</p>
+
+<script src="~/js/products.js"></script>
+<form id="add_product_form" method="post">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>kcal/100g</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @*<label>Name</label>*@
+                    <input type="text" name="name" />
+                </td>
+                <td>
+                    @*<label>kcal/100g</label>*@
+                    <input type="number" name="kcal" />
+                    <input id="add_product_button" type="submit" class="btn btn-primary small_button" value="Dodaj" />
+                </td>
+            </tr>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Name</td>
+                    <td>
+                        @(Math.Round(p.Energy/10, 0))
+                        <a asp-controller="Products" asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger small_button" role="button">
+                            Delete
+                            @*<button id="delete_product_button" class="btn btn-danger small_button">Usuń</button>*@
+                        </a>
+                        <a asp-controller="Products" asp-action="Edit" asp-route-id="@p.Id" class="btn btn-dark small_button" role="button">
+                            Edit
+                            @*<button id="edit_product_button" class="btn btn-dark small_button">Edytuj</button>*@
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
