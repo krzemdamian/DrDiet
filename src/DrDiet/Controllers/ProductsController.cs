@@ -25,20 +25,29 @@ namespace DrDiet.Controllers.Products
         }
 
         [HttpPost]
-        public IActionResult Index(string name, int kcal)
+        public IActionResult Create([FromForm] Product newProduct)
         {
-            var newProduct = new Product()
-            {
-                Name = name,
-                Energy = kcal * 10
-            };
+            newProduct.Energy *= 10;
 
             _ctx.Add(newProduct);
             _ctx.SaveChanges();
 
             var model = _ctx.Products.ToList();
 
-            return View(model);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Edit([FromForm] Product product)
+        {
+            product.Energy *= 10;
+
+            _ctx.Update(product);
+            _ctx.SaveChanges();
+
+            var model = _ctx.Products.ToList();
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)
@@ -47,7 +56,6 @@ namespace DrDiet.Controllers.Products
             _ctx.Remove(productToRemove);
             _ctx.SaveChanges();
 
-            var model = _ctx.Products.ToList();
 
             return RedirectToAction(nameof(Index));
         }

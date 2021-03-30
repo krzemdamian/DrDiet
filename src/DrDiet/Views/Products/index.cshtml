@@ -2,44 +2,73 @@
 <h1>Products:</h1>
 <p>Count: @Model.Count()</p>
 
-<script src="~/js/products.js"></script>
-<form id="add_product_form" method="post">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>kcal/100g</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @*<label>Name</label>*@
-                    <input type="text" name="name" />
-                </td>
-                <td>
-                    @*<label>kcal/100g</label>*@
-                    <input type="number" name="kcal" />
-                    <input id="add_product_button" type="submit" class="btn btn-primary small_button" value="Dodaj" />
-                </td>
-            </tr>
-            @foreach (var p in Model)
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>kcal/100g</th>
+            <th/>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="add_product_row">
+            @*<form id="add_product_form" method="post">*@
+            @using (Html.BeginForm("Create", "Products", FormMethod.Post))
             {
-                <tr>
-                    <td>@p.Name</td>
-                    <td>
-                        @(Math.Round(p.Energy/10, 0))
-                        <a asp-controller="Products" asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger small_button" role="button">
-                            Delete
-                            @*<button id="delete_product_button" class="btn btn-danger small_button">Usuń</button>*@
-                        </a>
-                        <a asp-controller="Products" asp-action="Edit" asp-route-id="@p.Id" class="btn btn-dark small_button" role="button">
-                            Edit
-                            @*<button id="edit_product_button" class="btn btn-dark small_button">Edytuj</button>*@
-                        </a>
-                    </td>
-                </tr>
+                <td>
+                    <input autofocus id="product_add_name_field" type="text" name="Name" value=""/>
+                </td>
+                <td>
+                    <input type="number" name="Energy" />
+                </td>
+                <td>
+                    <input id="add_product_button" type="submit" class="btn btn-primary small_button" value="Add" />
+                </td>
             }
-        </tbody>
-    </table>
-</form>
+            @*</form>*@
+        </tr>
+        <tr id="edit_product_row" style="display: none;">
+            @using (Html.BeginForm("Edit", "Products", FormMethod.Post))
+            {
+                <td>
+                    <input id="edit_product_id" type="hidden" name="Id" value=""/>
+                    <input id="edit_product_name" type="text" name="Name" value=""/>
+                </td>
+                <td>
+                    <input id="edit_product_energy" type="number" name="Energy" value="" />
+                </td>
+                <td>
+                    <input id="edit_product_button" type="submit" class="btn btn-primary small_button" value="Submit" />
+                    <button id="edit_cancel_product_button" type="button" class="btn btn-warning small_button" onClick="cancel_edit()">Cancel</button>
+                </td>
+            }
+        </tr>
+        @foreach (var p in Model)
+        {
+            <tr id="@p.Id">
+                <td>@p.Name</td>
+                <td>
+                    @(Math.Round(p.Energy / 10, 0))
+                </td>
+                <td>
+                    <a asp-controller="Products" asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger small_button" role="button">Delete</a>
+                    @*<a class="btn btn-dark small_button" role="button" onclick="show_edit_form(@{$"{p.Id}, {p.Name}, {p.Energy}";}">Edit</a>*@
+                    <a id="edit_button" class="btn btn-dark small_button" role="button" onclick="show_edit_form(@p.Id , '@p.Name', @Math.Round(p.Energy/10))">Edit</a>
+                </td>
+            </tr>
+            @*<tr hidden>
+                <form id="product_@p.Id" method="post" >
+                    <td>
+                        <input type="text" name="name" value="@p.Name"/>
+                    </td>
+                    <td>
+                        <input type="number" name="kcal" value="@(Math.Round(p.Energy/10, 0))">
+                        <input id="edit_product_button" type="submit" class="btn btn-primary small_button" value="Submit" />
+                        <button id="edit_cancel_product_button" type="button" class="btn btn-warning small_button">Cancel</button>
+                    </td>
+                </form>
+            </tr>*@
+        }
+    </tbody>
+</table>
+<script src="~/js/products.js"></script>
