@@ -2,9 +2,11 @@
 <h1>Recipes:</h1>
 <p>Count: @Model.Count()</p>
 
-@*<tr><th scope="col">Name</th></tr>*@
 @foreach (var r in Model)
 {
+    <div>
+        <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@r.Id" class="btn btn-primary small_button">Edit</a>
+    </div>
     <div>
         <div>@r.Name</div>
         <div>@(Math.Round(r.Ingredients.Sum(i => i.Ammount * (double)i.Product.Energy), 0)) kcal</div>

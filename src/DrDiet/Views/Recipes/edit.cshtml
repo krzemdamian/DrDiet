@@ -1,0 +1,35 @@
+﻿@model Recipe
+<h1>Change recipe:</h1>
+
+@*<tr><th scope="col">Name</th></tr>*@
+    <div>
+        <div>@Model.Name</div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Kalorie</th>
+                <th/>
+            </tr>
+        </thead>
+        @foreach (var i in Model.Ingredients)
+        {
+            <tr>
+                <td>@i.Product.Name</td>
+                <td>@(i.Ammount*1000) g</td>
+                <td>@(Math.Round((double)i.Product.Energy * i.Ammount, 0)) kcal</td>
+                <td>
+                    <a asp-controller="Recipes" 
+                       asp-action="DeleteIngredient" 
+                       asp-route-modelId="@Model.Id" 
+                       asp-route-ingedientId="@i.Id" 
+                       class="btn btn-danger small_button">
+                    Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+<div>@Model.Instructions</div>
