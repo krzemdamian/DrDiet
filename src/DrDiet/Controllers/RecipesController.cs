@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrDiet.Data;
+using DrDiet.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,8 @@ namespace DrDiet.Controllers
                 .ThenInclude(i => i.Product)
                 .FirstOrDefault();
 
+            ViewBag.products = _ctx.Products.OrderBy(p => p.Name);
+
             return View(model);
         }
 
@@ -46,6 +49,26 @@ namespace DrDiet.Controllers
 
             var ingredientToRemove = model.Ingredients.FirstOrDefault(i => i.Id == ingedientId);
             model.Ingredients.Remove(ingredientToRemove);
+            _ctx.Remove(ingredientToRemove);
+
+            _ctx.Recipes.Update(model);
+            _ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Edit), new { id = modelId });
+        }
+
+        public IActionResult AddIngredient(int modelId, int productId, int weightInGrams)
+        {
+            var model = _ctx.Recipes
+                .Where(r => r.Id == modelId)
+                .Include(r => r.Ingredients)
+                .ThenInclude(i => i.Product)
+                .FirstOrDefault();
+
+            var product = _ctx.Products.Find(productId);
+            var ammountInKilos = (double)weightInGrams / 1000.0;
+            var newIngredient = new Ingredient() { Ammount = ammountInKilos, Product = product };
+            model.Ingredients.Add(newIngredient);
 
             _ctx.Recipes.Update(model);
             _ctx.SaveChanges();
