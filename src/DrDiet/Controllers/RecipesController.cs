@@ -75,5 +75,29 @@ namespace DrDiet.Controllers
 
             return RedirectToAction(nameof(Edit), new { id = modelId });
         }
+
+        public IActionResult Rename(int id, string newName)
+        {
+            var model = _ctx.Recipes.Find(id);
+            model.Name = newName;
+
+            _ctx.Update(model);
+            _ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Edit), new { id = id });
+        }
+
+        public IActionResult EditInstructions(int id, string newInstructions)
+        {
+            var model = _ctx.Recipes.Find(id);
+            model.Instructions = newInstructions;
+
+            _ctx.Update(model);
+            _ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Edit), new { id = id });
+        }
+
+
     }
 }

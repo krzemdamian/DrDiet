@@ -3,7 +3,23 @@
 
 @*<tr><th scope="col">Name</th></tr>*@
 <div>
-    <div>@Model.Name</div>
+    <div id="recipe_name" class="float-left">@Model.Name</div>
+    <button id="rename_recipe" class="btn btn-primary small_button" onclick="enableRename()">Rename</button>
+    <div id="rename_form" style="display: none" class="container">
+        @using (Html.BeginForm("Rename", "Recipes", FormMethod.Post))
+        {
+        <div class="row">
+            <input name="id" type="hidden" value="@Model.Id" />
+            <div class="col-9">
+                <input name="newName" type="text" value="@Model.Name" class="form-control" />
+            </div>
+            <div class="col">
+                <a id="cancel_rename" class="btn btn-warning small_button" onclick="disableRename()">Cancel</a>
+                <input type="submit" value="Submit" class="btn btn-outline-primary small_button" />
+            </div>
+        </div>
+        }
+    </div>
 </div>
 <table class="table">
     <thead>
@@ -11,7 +27,7 @@
             <th scope="col">Nazwa</th>
             <th scope="col">Ilość</th>
             <th scope="col">Kalorie</th>
-            <th />
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     @foreach (var i in Model.Ingredients)
@@ -32,22 +48,22 @@
         </tr>
     }
     <tr>
-        @Html.BeginForm("AddIngredient", "Recipes", FormMethod.Post)
+        @using (Html.BeginForm("AddIngredient", "Recipes", FormMethod.Post))
         {
         <td>
-            <select id="available_products" name="productId">
+            <select id="available_products" name="productId" class="form-control">
                 @foreach (var option in ViewBag.products)
                 {
                     <option value="@option.Id" data="@option.Energy">@option.Name</option>
-                }
+                    }
             </select>
         </td>
         <td>
             <input name="modelId" type="hidden" value="@Model.Id"/>
-            <input id="weight_in_grams" name="weightInGrams" type="number" value="" oninput="update_kcals()" />
+            <input id="weight_in_grams" name="weightInGrams" type="number" value="" oninput="update_kcals()" class="form-control"/>
         </td>
         <td>
-            <input id="kcals" name="kcals" type="number" value="" disabled />
+            <input id="kcals" name="kcals" type="number" value="" disabled class="form-control"/>
         </td>
         <td>
             <button id="cancel_button" class="btn btn-warning small_button">Cancel</button>
@@ -56,5 +72,24 @@
         }
     </tr>
 </table>
-<div>@Model.Instructions</div>
+<div class="container">
+    <div id="instructions" class="float-left">@Model.Instructions</div>
+    <button id="enable_instructions_edit_button" class="btn btn-primary small_button" onclick="enableInstructionsEdit()">Edit</button>
+    <div id="edit_instructions_form" style="display: none">
+        @using (Html.BeginForm("EditInstructions", "Recipes", FormMethod.Post))
+        {
+        <div class="row">
+            <input name="id" type="hidden" value="@Model.Id" />
+            <div class="col-9">
+                <textarea name="newInstructions" class="form-control">@Model.Instructions</textarea>
+            </div>
+            <div class="col">
+                <a id="cancel_edit_instructions" class="btn btn-warning small_button" onclick="disableInstructionsEdit()">Cancel</a>
+                <input type="submit" value="Submit" class="btn btn-outline-primary small_button" />
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<div>&nbsp;</div>
 <script src="~/js/recipes_edit.js"></script>
