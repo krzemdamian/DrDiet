@@ -98,6 +98,42 @@ namespace DrDiet.Controllers
             return RedirectToAction(nameof(Edit), new { id = id });
         }
 
+        public IActionResult Add([FromForm] Recipe recipe)
+        {
+            // TODO: add ViewModel insted adapting ammount
+            if (recipe.Ingredients is { })
+            {
+
+                var usedProductIds = recipe.Ingredients.Select(i => i.Product).Select(p => p.Id);
+                var productsInDb = _ctx.Products.Where(p => usedProductIds.Contains(p.Id)).ToDictionary(p => p.Id, p => p);
+                foreach(var ingredient in recipe.Ingredients)
+                {
+                    ingredient.Product = productsInDb[ingredient.Product.Id];
+                    ingredient.Ammount /= 1000;
+                }
+                _ctx.Recipes.Add(recipe);
+                _ctx.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.products = _ctx.Products.OrderBy(p => p.Name);
+
+            return View();
+            //return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var recipeToDelete = _ctx.Recipes
+                .Where(r => r.Id == id)
+                .Include(r => r.Ingredients)
+                .FirstOrDefault();
+            recipeToDelete.Ingredients.ToList().ForEach(i => _ctx.Remove(i));
+            _ctx.Recipes.Remove(recipeToDelete);
+            _ctx.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
 
     }
 }
