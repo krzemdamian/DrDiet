@@ -119,7 +119,6 @@ namespace DrDiet.Controllers
             ViewBag.products = _ctx.Products.OrderBy(p => p.Name);
 
             return View();
-            //return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)

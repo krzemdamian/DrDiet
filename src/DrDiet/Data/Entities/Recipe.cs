@@ -12,5 +12,6 @@ namespace DrDiet.Data.Entities
         public string Name { get; set; }
         public ICollection<Ingredient> Ingredients { get; set; }
         public string Instructions { get; set; }
+        public double GetTotalEnergy() => this.Ingredients.Sum(i => (double)i.Product.Energy * i.Ammount);
     }
 }
