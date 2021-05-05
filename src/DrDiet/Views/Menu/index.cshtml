@@ -1,1 +1,44 @@
-﻿@Model MenuPosition 
+﻿@model IEnumerable<MenuPosition>
+<h1>Menu Positions:</h1>
+<p>Count: @Model.Count()</p>
+
+<a asp-action="Add" asp-controller="Menu" class="btn btn-primary small_button">Add Menu Position</a>
+@foreach (var menuPosition in Model)
+{
+    <div class="float-right">
+        <a asp-action="Edit" asp-controller="Menu" asp-route-id="@menuPosition.Id" class="btn btn-primary small_button">Edit</a>
+        <a asp-action="Delete" asp-controller="Menu" asp-route-id="@menuPosition.Id" class="btn btn-danger small_button">Delete</a>
+    </div>
+    <div>
+        <div>@menuPosition.DateTime</div>
+        <div>@(Math.Round(0
+                          + menuPosition.Courses?.Sum(c => c.Ammount * (double)c.Recipe.GetTotalEnergy()) ?? 0
+                          + menuPosition.OtherProducts?.Sum(o => o.Ammount * (double)o.Product.Energy) ?? 0
+                         ,0)) kcal</div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Kalorie</th>
+            </tr>
+        </thead>
+        @foreach (var course in menuPosition.Courses ?? Enumerable.Empty<Course>())
+        {
+            <tr>
+                <td>@course.Recipe.Name</td>
+                <td>@(course.Ammount*1000) g</td>
+                <td>@(Math.Round((double)course.Recipe.GetTotalEnergy() * course.Ammount, 0)) kcal</td>
+            </tr>
+        }
+        @foreach (var ingredient in menuPosition.OtherProducts ?? Enumerable.Empty<Ingredient>())
+        {
+            <tr>
+                <td>@ingredient.Product.Name</td>
+                <td>@(ingredient.Ammount*1000) g</td>
+                <td>@(Math.Round((double)ingredient.Product.Energy * ingredient.Ammount, 0)) kcal</td>
+            </tr>
+        }
+    </table>
+}

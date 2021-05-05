@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,15 @@ namespace DrDiet.Controllers
         }
         public IActionResult Index()
         {
-            return RedirectToAction(nameof(Add));
-            //return View();
+            var model = _ctx.MenuPositions
+                .Include(m => m.Courses)
+                    .ThenInclude(c => c.Recipe)
+                    .ThenInclude(r => r.Ingredients)
+                    .ThenInclude(i => i.Product)
+                .Include(m => m.OtherProducts)
+                    .ThenInclude(p => p.Product);
+            //return RedirectToAction(nameof(Add));
+            return View(model);
 
         }
         public IActionResult Add([FromForm] MenuPosition newPosition)
@@ -52,6 +60,16 @@ namespace DrDiet.Controllers
             ViewBag.products = _ctx.Products.OrderBy(p => p.Name);
 
             return View();
+        }
+
+        public IActionResult Edit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult Delete()
+        {
+            throw new NotImplementedException();
         }
     }
 }
