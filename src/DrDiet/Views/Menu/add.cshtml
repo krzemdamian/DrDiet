@@ -21,7 +21,8 @@
                 <div class="col-9">
                     <div class="form-group">
                         <div class='input-group date'>
-                            <input type='text' class="form-control" id="my-datetimepicker"/>
+                            <p>Date and time:</p>
+                            <input name="DateTime" type='text' class="form-control" id="my-datetimepicker" value="">
                         </div>
                     </div>
                 </div>
@@ -37,28 +38,46 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody id="courses-table-body" >
+        <tbody id="menu-components-table-body" >
             <tr id="new-course-row">
                 <td>
-                    <select class="available_recipe form-control" name="courses[0].Recipe.Id" onchange="update_kcals(this.name)">
+                    <select class="available_recipes form-control" name="courses[0].Recipe.Id" onchange="update_kcals_courses(this.name)">
                         @foreach (var recipe in ViewBag.recipes)
                         {
-                            <option value="@recipe .Id" data="@recipe.GetTotalEnergy()">@recipe.Name</option>
+                            <option value="@recipe.Id" data="@recipe.GetTotalEnergy()">@recipe.Name</option>
                         }
                     </select>
                 </td>
                 <td>
-                    <input class="weight_in_grams form-control" name="courses[0].Ammount" type="number" value="" oninput="update_kcals(this.name)" />
+                    <input class="weight_in_grams_courses form-control" name="courses[0].Ammount" type="number" value="" oninput="update_kcals_courses(this.name)" />
                 </td>
                 <td>
-                    <input class="kcals form-control" name="kcals" type="number" value="" disabled />
+                    <input class="kcals kcals_courses form-control" name="kcals" type="number" value="" disabled />
+                </td>
+                <td></td>
+            </tr>
+            <tr id="new-ingredient-row" style="display: none">
+                <td>
+                    <select class="available_products form-control" name="otherProducts[0].Product.Id" onchange="update_kcals_ingredients(this.name)">
+                        @foreach (var option in ViewBag.products)
+                        {
+                            <option value="@option.Id" data="@option.Energy">@option.Name</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input class="weight_in_grams_ingredients form-control" name="otherProducts[0].Ammount" type="number" value="" oninput="update_kcals_ingredients(this.name)" />
+                </td>
+                <td>
+                    <input class="kcals kcals_ingredients form-control" name="kcals" type="number" value="" disabled />
                 </td>
                 <td></td>
             </tr>
         </tbody>
     </table>
     <div class="float-right">
-        <button id="add-recipe-button" class="btn btn-primary small_button" type="button" onclick="addIngredientRow()">Add Recipe</button>
+        <button id="add-course-button" class="btn btn-primary small_button" type="button" onclick="addCourseRow()">Add Course</button>
+        <button id="add-ingredient-button" class="btn btn-primary small_button" type="button" onclick="addIngredientRow()">Add Ingredient</button>
     </div>
     <div>&nbsp;</div>
     <div>
