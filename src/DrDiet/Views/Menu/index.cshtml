@@ -12,8 +12,8 @@
     <div>
         <div>@menuPosition.DateTime</div>
         <div>@(Math.Round(0
-                          + menuPosition.Courses?.Sum(c => c.Ammount * (double)c.Recipe.GetTotalEnergy()) ?? 0
-                          + menuPosition.OtherProducts?.Sum(o => o.Ammount * (double)o.Product.Energy) ?? 0
+                          + (menuPosition.Courses?.Sum(c => c.Ammount * (double)c.Recipe.GetTotalEnergy()) ?? 0)
+                          + (menuPosition.OtherProducts?.Sum(o => o.Ammount * (double)o.Product.Energy) ?? 0)
                          ,0)) kcal</div>
     </div>
     <table class="table">
@@ -34,7 +34,7 @@
             @foreach (var ingredient in course.Recipe.Ingredients)
             {
                 <tr>
-                    <td class="nested_row gray_td">@ingredient.Product.Name</td>
+                    <td class="nested_row gray_td">&#8226; @ingredient.Product.Name</td>
                     <td class="gray_td">@Math.Round(ingredient.Ammount * course.Recipe.GetMultiplierToKilo() * course.Ammount * 1000, 0) g</td>
                     <td class="gray_td">@Math.Round((double) ingredient.Product.Energy * ingredient.Ammount * course.Ammount, 0)</td>
                 </tr>

@@ -39,9 +39,9 @@
             </tr>
         </thead>
         <tbody id="menu-components-table-body" >
-            <tr id="new-course-row">
+            <tr id="new-course-row" style="display: none">
                 <td>
-                    <select class="available_recipes form-control" name="courses[0].Recipe.Id" onchange="update_kcals_courses(this.name)">
+                    <select class="available_recipes form-control" onchange="update_kcals_courses(this.name)">
                         @foreach (var recipe in ViewBag.recipes)
                         {
                             <option value="@recipe.Id" data="@recipe.GetTotalEnergyPerKilo()">@recipe.Name</option>
@@ -49,7 +49,7 @@
                     </select>
                 </td>
                 <td>
-                    <input class="weight_in_grams_courses form-control" name="courses[0].Ammount" type="number" value="" oninput="update_kcals_courses(this.name)" />
+                    <input class="weight_in_grams_courses form-control" type="number" value="" oninput="update_kcals_courses(this.name)" />
                 </td>
                 <td>
                     <input class="kcals kcals_courses form-control" name="kcals" type="number" value="" disabled />
@@ -58,7 +58,7 @@
             </tr>
             <tr id="new-ingredient-row" style="display: none">
                 <td>
-                    <select class="available_products form-control" name="otherProducts[0].Product.Id" onchange="update_kcals_ingredients(this.name)">
+                    <select class="available_products form-control" onchange="update_kcals_ingredients(this.name)">
                         @foreach (var option in ViewBag.products)
                         {
                             <option value="@option.Id" data="@option.Energy">@option.Name</option>
@@ -66,7 +66,7 @@
                     </select>
                 </td>
                 <td>
-                    <input class="weight_in_grams_ingredients form-control" name="otherProducts[0].Ammount" type="number" value="" oninput="update_kcals_ingredients(this.name)" />
+                    <input class="weight_in_grams_ingredients form-control" type="number" value="" oninput="update_kcals_ingredients(this.name)" />
                 </td>
                 <td>
                     <input class="kcals kcals_ingredients form-control" name="kcals" type="number" value="" disabled />
