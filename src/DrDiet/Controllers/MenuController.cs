@@ -37,11 +37,12 @@ namespace DrDiet.Controllers
             if (newPosition.Courses is { } || newPosition.OtherProducts is { })
             {
                 var usedRecipesIds = newPosition.Courses.Select(c => c.Recipe.Id);
-                var reciresInDB = _ctx.Recipes.Where(r => usedRecipesIds.Contains(r.Id))
+                var recipesInDb = _ctx.Recipes.Where(r => usedRecipesIds.Contains(r.Id))
                     .ToDictionary(r => r.Id, r => r);
                 foreach (var course in newPosition.Courses ?? Enumerable.Empty<Course>())
                 {
-                    course.Recipe = reciresInDB[course.Recipe.Id];
+                    course.Ammount /= 1000;
+                    course.Recipe = recipesInDb[course.Recipe.Id];
                 }
 
                 var usedProductIds = newPosition.OtherProducts.Select(i => i.Product).Select(p => p.Id);

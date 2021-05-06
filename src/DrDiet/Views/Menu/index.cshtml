@@ -31,6 +31,14 @@
                 <td>@(course.Ammount*1000) g</td>
                 <td>@(Math.Round((double)course.Recipe.GetTotalEnergy() * course.Ammount, 0)) kcal</td>
             </tr>
+            @foreach (var ingredient in course.Recipe.Ingredients)
+            {
+                <tr>
+                    <td class="nested_row gray_td">@ingredient.Product.Name</td>
+                    <td class="gray_td">@Math.Round(ingredient.Ammount * course.Recipe.GetMultiplierToKilo() * course.Ammount * 1000, 0) g</td>
+                    <td class="gray_td">@Math.Round((double) ingredient.Product.Energy * ingredient.Ammount * course.Ammount, 0)</td>
+                </tr>
+            }
         }
         @foreach (var ingredient in menuPosition.OtherProducts ?? Enumerable.Empty<Ingredient>())
         {

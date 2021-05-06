@@ -44,7 +44,7 @@
                     <select class="available_recipes form-control" name="courses[0].Recipe.Id" onchange="update_kcals_courses(this.name)">
                         @foreach (var recipe in ViewBag.recipes)
                         {
-                            <option value="@recipe.Id" data="@recipe.GetTotalEnergy()">@recipe.Name</option>
+                            <option value="@recipe.Id" data="@recipe.GetTotalEnergyPerKilo()">@recipe.Name</option>
                         }
                     </select>
                 </td>
