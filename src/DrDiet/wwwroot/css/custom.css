@@ -1,0 +1,21 @@
+﻿.nested_row {
+    /*padding: 40px;*/
+    padding: 2px 14px 2px 40px;
+}
+
+.table td {
+    padding: 2px 14px 2px 14px;
+}
+
+.small_button {
+    padding: 1px 6px 3px 6px;
+    margin: 0 1px 0 1px;
+}
+
+.nested_row {
+    padding: 2px 14px 2px 40px !important;
+}
+
+.gray_td {
+    background: rgb(240,240,240);
+}

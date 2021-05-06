@@ -17,8 +17,5 @@
   <ItemGroup>
     <None Include="node_modules/**" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\Date-Time-Picker-Bootstrap-4\build\" />
-  </ItemGroup>
 
 </Project>
