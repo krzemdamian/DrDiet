@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Recipe>
+<h1>Recipes:</h1>
+<p>Count: @Model.Count()</p>
+
+<a asp-action="Add" asp-controller="Recipes" class="btn btn-primary small_button">Add Recipe</a>
+@foreach (var r in Model)
+{
+    <div class="float-right">
+        <a asp-action="Edit" asp-controller="Recipes" asp-route-id="@r.Id" class="btn btn-primary small_button">Edit</a>
+        <a asp-action="Delete" asp-controller="Recipes" asp-route-id="@r.Id" class="btn btn-danger small_button">Delete</a>
+    </div>
+    <div>
+        <div>@r.Name</div>
+        <div>@(Math.Round(r.Ingredients.Sum(i => i.Ammount * (double)i.Product.Energy), 0)) kcal</div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Kalorie</th>
+            </tr>
+        </thead>
+        @foreach (var i in r.Ingredients)
+        {
+            <tr>
+                <td>@i.Product.Name</td>
+                <td>@(i.Ammount*1000) g</td>
+                <td>@(Math.Round((double)i.Product.Energy * i.Ammount, 0)) kcal</td>
+            </tr>
+        }
+    </table>
+    <div>@r.Instructions</div>
+}

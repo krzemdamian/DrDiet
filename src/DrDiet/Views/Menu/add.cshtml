@@ -1,0 +1,87 @@
+﻿@section scripts {
+    <script src="~/node_modules/popper.js/dist/popper.js/popper.min.js"></script>
+    <script src="~/node_modules/moment/min/moment.min.js"></script>
+    <script src="~/node_modules/pc-bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/js/menu_position_add.js"></script>
+}
+<h1>Add Menu Position</h1>
+<link href="~/node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row justify-content-end">
+        <div id="kcal_info" class="btn btn-outline-secondary col-2">0 kcal</div>
+        <div class="col-1">&nbsp;</div>
+    </div>
+</div>
+@using (Html.BeginForm("Add", "Menu", FormMethod.Post))
+{
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <div class="form-group">
+                        <div class='input-group date'>
+                            <p>Date and time:</p>
+                            <input name="DateTime" type='text' class="form-control" id="my-datetimepicker" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="courses-table" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Kalorie</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="menu-components-table-body" >
+            <tr id="new-course-row" style="display: none">
+                <td>
+                    <select class="available_recipes form-control" onchange="update_kcals_courses(this.name)">
+                        @foreach (var recipe in ViewBag.recipes)
+                        {
+                            <option value="@recipe.Id" data="@recipe.GetTotalEnergyPerKilo()">@recipe.Name</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input class="weight_in_grams_courses form-control" type="number" value="" oninput="update_kcals_courses(this.name)" />
+                </td>
+                <td>
+                    <input class="kcals kcals_courses form-control" name="kcals" type="number" value="" disabled />
+                </td>
+                <td><button type="button" class="btn btn-danger delete_button">Delete</button></td>
+            </tr>
+            <tr id="new-ingredient-row" style="display: none">
+                <td>
+                    <select class="available_products form-control" onchange="update_kcals_ingredients(this.name)">
+                        @foreach (var option in ViewBag.products)
+                        {
+                            <option value="@option.Id" data="@option.Energy">@option.Name</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input class="weight_in_grams_ingredients form-control" type="number" value="" oninput="update_kcals_ingredients(this.name)" />
+                </td>
+                <td>
+                    <input class="kcals kcals_ingredients form-control" name="kcals" type="number" value="" disabled />
+                </td>
+                <td><button type="button" class="btn btn-danger delete_button">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="float-right">
+        <button id="add-course-button" class="btn btn-primary small_button" type="button" onclick="addCourseRow()">Add Course</button>
+        <button id="add-ingredient-button" class="btn btn-primary small_button" type="button" onclick="addIngredientRow()">Add Ingredient</button>
+    </div>
+    <div>&nbsp;</div>
+    <div>
+        <input type="submit" value="Submit" class="btn btn-outline-primary small_button float-right" />
+    </div>
+    <div>&nbsp;</div>
+}
