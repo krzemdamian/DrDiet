@@ -1,0 +1,127 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "jsdelivr",
+      "library": "pc-bootstrap4-datetimepicker@4.17.51",
+      "destination": "wwwroot/lib/pc-bootstrap4-datetimepicker/",
+      "files": [
+        "build/css/bootstrap-datetimepicker.min.css",
+        "build/js/bootstrap-datetimepicker.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap@5.0.1",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.bundle.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "font-awesome@4.7.0",
+      "destination": "wwwroot/lib/font-awesome/",
+      "files": [
+        "css/font-awesome.css"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "dist/jquery.min.js"
+      ]
+    }
+  ,
+{
+  "provider": "jsdelivr",
+  "library": "font-awesome@4.7.0",
+  "destination": "wwwroot/lib/font-awesome/",
+  "files": [
+    "fonts/fontawesome-webfont.eot",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/FontAwesome.otf"
+  ]
+}
+,
+{
+  "provider": "jsdelivr",
+  "library": "font-awesome@4.7.0",
+  "destination": "wwwroot/lib/font-awesome/",
+  "files": [
+    "fonts/fontawesome-webfont.eot",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/FontAwesome.otf",
+    "css/font-awesome.css"
+  ]
+}
+,
+{
+  "provider": "jsdelivr",
+  "library": "bootstrap@5.0.1",
+  "destination": "wwwroot/lib/bootstrap/",
+  "files": [
+    "dist/css/bootstrap-grid.css",
+    "dist/css/bootstrap-grid.css.map",
+    "dist/css/bootstrap-grid.min.css",
+    "dist/css/bootstrap-grid.min.css.map",
+    "dist/css/bootstrap-grid.rtl.css",
+    "dist/css/bootstrap-grid.rtl.css.map",
+    "dist/css/bootstrap-grid.rtl.min.css",
+    "dist/css/bootstrap-grid.rtl.min.css.map",
+    "dist/css/bootstrap-reboot.css",
+    "dist/css/bootstrap-reboot.css.map",
+    "dist/css/bootstrap-reboot.min.css",
+    "dist/css/bootstrap-reboot.min.css.map",
+    "dist/css/bootstrap-reboot.rtl.css",
+    "dist/css/bootstrap-reboot.rtl.css.map",
+    "dist/css/bootstrap-reboot.rtl.min.css",
+    "dist/css/bootstrap-reboot.rtl.min.css.map",
+    "dist/css/bootstrap-utilities.css",
+    "dist/css/bootstrap-utilities.css.map",
+    "dist/css/bootstrap-utilities.min.css",
+    "dist/css/bootstrap-utilities.min.css.map",
+    "dist/css/bootstrap-utilities.rtl.css",
+    "dist/css/bootstrap-utilities.rtl.css.map",
+    "dist/css/bootstrap-utilities.rtl.min.css",
+    "dist/css/bootstrap-utilities.rtl.min.css.map",
+    "dist/css/bootstrap.css",
+    "dist/css/bootstrap.css.map",
+    "dist/css/bootstrap.min.css",
+    "dist/css/bootstrap.min.css.map",
+    "dist/css/bootstrap.rtl.css",
+    "dist/css/bootstrap.rtl.css.map",
+    "dist/css/bootstrap.rtl.min.css",
+    "dist/css/bootstrap.rtl.min.css.map",
+    "dist/js/bootstrap.bundle.js",
+    "dist/js/bootstrap.bundle.js.map",
+    "dist/js/bootstrap.bundle.min.js",
+    "dist/js/bootstrap.bundle.min.js.map",
+    "dist/js/bootstrap.esm.js",
+    "dist/js/bootstrap.esm.js.map",
+    "dist/js/bootstrap.esm.min.js",
+    "dist/js/bootstrap.esm.min.js.map",
+    "dist/js/bootstrap.js",
+    "dist/js/bootstrap.js.map",
+    "dist/js/bootstrap.min.js",
+    "dist/js/bootstrap.min.js.map"
+  ]
+}
+,
+{
+  "provider": "jsdelivr",
+  "library": "bootstrap@5.0.1",
+  "destination": "wwwroot/lib/bootstrap/"
+}
+]
+}

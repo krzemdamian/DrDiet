@@ -54,7 +54,6 @@ namespace DrDiet
 
             //app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseNodeModules();
 
             app.UseEndpoints(endpoints =>
             {
